@@ -14,11 +14,15 @@ export const getAllTasks = async (req, res) => {
 // POST /api/tasks
 export const createTask = async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, description } = req.body;
     if (!title) return res.status(400).json({ error: 'Falta el título' });
 
+    const createdAt = new Date().toISOString();
     const db = await openDb();
-    const result = await db.run('INSERT INTO tasks (title, completed) VALUES (?, ?)', [title, 0]);
+    const result = await db.run(
+      'INSERT INTO tasks (title, description, completed, createdAt) VALUES (?, ?, ?, ?)',
+      [title, description || '', 0, createdAt]
+    );
     const newTask = await db.get('SELECT * FROM tasks WHERE id = ?', [result.lastID]);
     res.status(201).json(newTask);
   } catch (err) {
@@ -26,16 +30,19 @@ export const createTask = async (req, res) => {
   }
 };
 
+
 // PUT /api/tasks/:id
 export const updateTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const { title, completed } = req.body;
+    const { title, description, completed } = req.body;
+
     const db = await openDb();
     await db.run(
-      'UPDATE tasks SET title = ?, completed = ? WHERE id = ?',
-      [title, completed ? 1 : 0, id]
+      'UPDATE tasks SET title = ?, description = ?, completed = ? WHERE id = ?',
+      [title, description || '', completed ? 1 : 0, id]
     );
+
     const updatedTask = await db.get('SELECT * FROM tasks WHERE id = ?', [id]);
     res.json(updatedTask);
   } catch (err) {
