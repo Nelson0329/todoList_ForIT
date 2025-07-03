@@ -19,11 +19,17 @@ const Home = () => {
     setTasks((prev) => [...prev, newTask]);
   };
 
+  const handleTaskUpdate = (updatedTask) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+    );
+  };
+
   return (
     <div className="p-4 max-w-xl mx-auto">
       <h1 className="text-3xl font-bold mb-4 text-center">Mis tareas</h1>
       <TaskForm onTaskCreated={handleTaskCreated} />
-      <TaskList tasks={tasks} />
+      <TaskList tasks={tasks} onUpdate={handleTaskUpdate} />
       <button
         onClick={fetchTasks}
         className="mt-4 underline text-sm text-gray-500"

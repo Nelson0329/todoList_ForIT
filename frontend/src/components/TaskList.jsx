@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react";
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, onUpdate }) => {
   return (
     <div className="space-y-3">
       {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} />
+        <TaskItem key={task.id} task={task} onStatusToggle={onUpdate} />
       ))}
     </div>
   );
