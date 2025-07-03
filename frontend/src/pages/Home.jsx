@@ -25,11 +25,19 @@ const Home = () => {
     );
   };
 
+  const handleDelete = (id) => {
+    setTasks((prev) => prev.filter((task) => task.id !== id));
+  };
+
   return (
     <div className="p-4 max-w-xl mx-auto">
       <h1 className="text-3xl font-bold mb-4 text-center">Mis tareas</h1>
       <TaskForm onTaskCreated={handleTaskCreated} />
-      <TaskList tasks={tasks} onUpdate={handleTaskUpdate} />
+      <TaskList
+        tasks={tasks}
+        onUpdate={handleTaskUpdate}
+        onDelete={handleDelete}
+      />
       <button
         onClick={fetchTasks}
         className="mt-4 underline text-sm text-gray-500"

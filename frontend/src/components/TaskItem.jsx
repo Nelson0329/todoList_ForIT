@@ -1,4 +1,4 @@
-const TaskItem = ({ task, onStatusToggle }) => {
+const TaskItem = ({ task, onStatusToggle, onDelete }) => {
   const handleToggle = async () => {
     try {
       const res = await fetch(`http://localhost:3001/api/tasks/${task.id}`, {
@@ -13,9 +13,25 @@ const TaskItem = ({ task, onStatusToggle }) => {
       if (!res.ok) throw new Error("Error al actualizar tarea");
 
       const updatedTask = await res.json();
-      onStatusToggle(updatedTask); // Actualiza el estado desde el padre
+      onStatusToggle(updatedTask);
     } catch (err) {
       console.error("Error al actualizar tarea:", err);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!confirm("¿Seguro que querés eliminar esta tarea?")) return;
+
+    try {
+      const res = await fetch(`http://localhost:3001/api/tasks/${task.id}`, {
+        method: "DELETE",
+      });
+
+      if (!res.ok) throw new Error("Error al eliminar tarea");
+
+      onDelete(task.id);
+    } catch (err) {
+      console.error("Error al eliminar tarea:", err);
     }
   };
 
@@ -38,9 +54,15 @@ const TaskItem = ({ task, onStatusToggle }) => {
         </div>
         <button
           onClick={handleToggle}
-          className="text-sm text-blue-600 underline"
+          className="text-sm text-blue-600 underline block"
         >
           {task.completed ? "Desmarcar" : "Completar"}
+        </button>
+        <button
+          onClick={handleDelete}
+          className="text-sm text-red-600 underline block"
+        >
+          Eliminar
         </button>
       </div>
     </div>
