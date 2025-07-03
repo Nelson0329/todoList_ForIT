@@ -4,7 +4,8 @@ import TaskForm from "../components/TaskForm";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
-  const [editingTask, setEditingTask] = useState(null); // ← NUEVO
+  const [editingTask, setEditingTask] = useState(null);
+  const [searchTerm, setSearchTerm] = useState(""); // 🔍 búsqueda
 
   const fetchTasks = async () => {
     try {
@@ -45,19 +46,33 @@ const Home = () => {
     clearEditing();
   };
 
+  const filteredTasks = tasks.filter((task) =>
+    (task.title + task.description)
+      .toLowerCase()
+      .includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="p-4 max-w-xl mx-auto">
       <h1 className="text-3xl font-bold mb-4 text-center">Mis tareas</h1>
-      
+
       <TaskForm
         onTaskCreated={handleTaskCreated}
         onTaskUpdated={handleTaskUpdated}
         editingTask={editingTask}
         clearEditing={clearEditing}
       />
-      
+
+      <input
+        type="text"
+        placeholder="Buscar tareas..."
+        className="border p-2 w-full rounded mb-4"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+
       <TaskList
-        tasks={tasks}
+        tasks={filteredTasks}
         onUpdate={handleTaskUpdate}
         onDelete={handleDelete}
         onEdit={handleEdit}
@@ -74,4 +89,3 @@ const Home = () => {
 };
 
 export default Home;
-
