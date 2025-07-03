@@ -1,6 +1,6 @@
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ tasks, onUpdate, onDelete }) => {
+const TaskList = ({ tasks, onUpdate, onDelete, onEdit }) => {
   return (
     <div className="space-y-3">
       {tasks.map((task) => (
@@ -9,6 +9,7 @@ const TaskList = ({ tasks, onUpdate, onDelete }) => {
           task={task}
           onStatusToggle={onUpdate}
           onDelete={onDelete}
+          onEdit={onEdit}
         />
       ))}
     </div>

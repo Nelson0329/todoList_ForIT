@@ -1,4 +1,4 @@
-const TaskItem = ({ task, onStatusToggle, onDelete }) => {
+const TaskItem = ({ task, onStatusToggle, onDelete, onEdit }) => {
   const handleToggle = async () => {
     try {
       const res = await fetch(`http://localhost:3001/api/tasks/${task.id}`, {
@@ -35,6 +35,10 @@ const TaskItem = ({ task, onStatusToggle, onDelete }) => {
     }
   };
 
+  const handleEdit = () => {
+    onEdit(task);
+  };
+
   return (
     <div className="border p-4 rounded shadow flex justify-between items-center">
       <div>
@@ -57,6 +61,12 @@ const TaskItem = ({ task, onStatusToggle, onDelete }) => {
           className="text-sm text-blue-600 underline block"
         >
           {task.completed ? "Desmarcar" : "Completar"}
+        </button>
+        <button
+          onClick={handleEdit}
+          className="text-sm text-indigo-600 underline block"
+        >
+          Editar
         </button>
         <button
           onClick={handleDelete}

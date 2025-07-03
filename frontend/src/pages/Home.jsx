@@ -4,6 +4,7 @@ import TaskForm from "../components/TaskForm";
 
 const Home = () => {
   const [tasks, setTasks] = useState([]);
+  const [editingTask, setEditingTask] = useState(null); // ← NUEVO
 
   const fetchTasks = async () => {
     try {
@@ -29,15 +30,39 @@ const Home = () => {
     setTasks((prev) => prev.filter((task) => task.id !== id));
   };
 
+  const handleEdit = (task) => {
+    setEditingTask(task);
+  };
+
+  const clearEditing = () => {
+    setEditingTask(null);
+  };
+
+  const handleTaskUpdated = (updated) => {
+    setTasks((prev) =>
+      prev.map((task) => (task.id === updated.id ? updated : task))
+    );
+    clearEditing();
+  };
+
   return (
     <div className="p-4 max-w-xl mx-auto">
       <h1 className="text-3xl font-bold mb-4 text-center">Mis tareas</h1>
-      <TaskForm onTaskCreated={handleTaskCreated} />
+      
+      <TaskForm
+        onTaskCreated={handleTaskCreated}
+        onTaskUpdated={handleTaskUpdated}
+        editingTask={editingTask}
+        clearEditing={clearEditing}
+      />
+      
       <TaskList
         tasks={tasks}
         onUpdate={handleTaskUpdate}
         onDelete={handleDelete}
+        onEdit={handleEdit}
       />
+
       <button
         onClick={fetchTasks}
         className="mt-4 underline text-sm text-gray-500"
@@ -49,3 +74,4 @@ const Home = () => {
 };
 
 export default Home;
+
