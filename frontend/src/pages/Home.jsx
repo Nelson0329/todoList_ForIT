@@ -53,37 +53,41 @@ const Home = () => {
   );
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h1 className="text-3xl font-bold mb-4 text-center">Mis tareas</h1>
+    <div className="min-h-screen bg-gray-100 py-10 px-4">
+      <div className="max-w-2xl mx-auto bg-white shadow-lg rounded-xl p-6">
+        <h1 className="text-4xl font-bold mb-6 text-center text-indigo-600">
+          📝 Mis tareas
+        </h1>
 
-      <TaskForm
-        onTaskCreated={handleTaskCreated}
-        onTaskUpdated={handleTaskUpdated}
-        editingTask={editingTask}
-        clearEditing={clearEditing}
-      />
+        <TaskForm
+          onTaskCreated={handleTaskCreated}
+          onTaskUpdated={handleTaskUpdated}
+          editingTask={editingTask}
+          clearEditing={clearEditing}
+        />
 
-      <input
-        type="text"
-        placeholder="Buscar tareas..."
-        className="border p-2 w-full rounded mb-4"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+        <input
+          type="text"
+          placeholder="Buscar tareas..."
+          className="border border-gray-300 p-2 w-full rounded focus:outline-none focus:ring-2 focus:ring-indigo-400 mb-6"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
 
-      <TaskList
-        tasks={filteredTasks}
-        onUpdate={handleTaskUpdate}
-        onDelete={handleDelete}
-        onEdit={handleEdit}
-      />
+        <TaskList
+          tasks={filteredTasks}
+          onUpdate={handleTaskUpdate}
+          onDelete={handleDelete}
+          onEdit={handleEdit}
+        />
 
-      <button
-        onClick={fetchTasks}
-        className="mt-4 underline text-sm text-gray-500"
-      >
-        Recargar tareas
-      </button>
+        <button
+          onClick={fetchTasks}
+          className="mt-6 block mx-auto text-sm text-indigo-600 hover:underline"
+        >
+          🔄 Recargar tareas
+        </button>
+      </div>
     </div>
   );
 };
