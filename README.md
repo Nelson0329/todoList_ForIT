@@ -69,31 +69,49 @@ cd frontend
 npm install
 npm run dev      
 
-🖼️ Capturas de pantalla
+## 🖼️ Capturas de pantalla
 
-🏠 Pantalla principal
-![Home](./screenshots/PaginaPrincipal.png)
-✅ Tarea completada
+---
+
+### 🏠 Pantalla principal  
+![Home](../screenshots/PaginaPrincipal.png)
+---
+
+### ✅ Tarea completada  
 ![TareaCompletada](./screenshots/CreacionDeTareaExitosa.png)
-✏️ Edición de tareas
+
+---
+
+### ✏️ Edición de tareas  
 ![EdicionDeTarea](./screenshots/BotonEditarTarea.png)
 
-Eliminar Tarea
+---
+
+### 🗑️ Eliminar tarea  
 ![EliminarDeTarea](./screenshots/BotonEliminarTarea.png)
 
-Lista de Tareas
+---
+
+### 📋 Lista de tareas  
 ![ListaDeTareas](./screenshots/BotonVerListaDeTareas.png)
 
-Validacion de Formulario
-![ValidacionDeFormulario](./screenshots/ValidacionDeFormulario.png)
+---
 
-Creacion de una tarea
+### ✅ Validación de formulario  
+![ValidacionDeFormulario](./capturas/ValidacionDeFormulario.png)
+
+---
+
+### 🆕 Crear una nueva tarea  
 ![CreacionDeUnaTarea](./screenshots/CreacionDeUnaTarea.png)
 
-Filtrar Tarea
+---
+
+### 🔍 Filtro de tareas por texto  
 ![FiltroDeTareA](./screenshots/FiltroDeTareA.png)
 
 
+sino puede visualizar imagenes, ingresar a la carpeta screenshots
 
 🧪 Tecnologías utilizadas
 
