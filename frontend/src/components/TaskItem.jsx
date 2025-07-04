@@ -40,37 +40,40 @@ const TaskItem = ({ task, onStatusToggle, onDelete, onEdit }) => {
   };
 
   return (
-    <div className="border p-4 rounded shadow flex justify-between items-center">
-      <div>
-        <h2 className="text-xl font-semibold">{task.title}</h2>
+    <div className="bg-white border border-gray-200 p-4 rounded-lg shadow-sm hover:shadow-md transition flex justify-between items-start">
+      <div className="flex-1 pr-4">
+        <h2 className="text-lg font-semibold text-gray-800">{task.title}</h2>
         <p className="text-gray-600">{task.description}</p>
-        <small className="text-gray-400">
+        <small className="text-gray-400 block mt-1">
           Creado: {new Date(task.createdAt).toLocaleString()}
         </small>
+        <span
+          className={`inline-block mt-2 text-sm font-medium px-2 py-1 rounded-full ${
+            task.completed
+              ? "bg-green-100 text-green-700"
+              : "bg-yellow-100 text-yellow-700"
+          }`}
+        >
+          {task.completed ? "✔️ Completada" : "⏳ Pendiente"}
+        </span>
       </div>
-      <div className="text-right space-y-2">
-        <div>
-          {task.completed ? (
-            <span className="text-green-600 font-semibold">✔️ Completada</span>
-          ) : (
-            <span className="text-yellow-600 font-semibold">⏳ Pendiente</span>
-          )}
-        </div>
+
+      <div className="space-y-2 text-right">
         <button
           onClick={handleToggle}
-          className="text-sm text-blue-600 underline block"
+          className="text-xs px-3 py-1 rounded bg-blue-100 text-blue-700 hover:bg-blue-200"
         >
           {task.completed ? "Desmarcar" : "Completar"}
         </button>
         <button
           onClick={handleEdit}
-          className="text-sm text-indigo-600 underline block"
+          className="text-xs px-3 py-1 rounded bg-indigo-100 text-indigo-700 hover:bg-indigo-200 block"
         >
           Editar
         </button>
         <button
           onClick={handleDelete}
-          className="text-sm text-red-600 underline block"
+          className="text-xs px-3 py-1 rounded bg-red-100 text-red-700 hover:bg-red-200 block"
         >
           Eliminar
         </button>
